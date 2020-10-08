@@ -1,6 +1,9 @@
 package com.neu.mygithub.fragment.repos
 
 import android.content.Context
+import com.neu.mygithub.data.OnLoadRepos
+import com.neu.mygithub.data.loadRepos
+import com.neu.mygithub.github.model.Repo
 
 /**
  * implementa as regras de negócio da interface ReposPresenter
@@ -9,13 +12,23 @@ import android.content.Context
 class ReposPresenterImpl(
     private val context: Context,
     private val reposView: ReposView /*notifica ReposFragment*/
-) : ReposPresenter {
+) : ReposPresenter,OnLoadRepos {
 
-    override fun getMax(a: Int, b: Int, show: Boolean): Int {
-        val result = if (a > b) a else b
-        if (show)
-            reposView.showToast(result)
-        return result
+    override fun loadRepos() {
+        loadRepos(this)
     }
+
+    override fun onDatabaseResponse(listRepos: List<Repo>) {
+        reposView.recyclerAdapter.setRepos(listRepos, "database")
+    }
+
+    override fun onWebResponse(listRepos: List<Repo>) {
+        reposView.recyclerAdapter.setRepos(listRepos, "web")
+    }
+
+    override fun onWebFailure(msg: String) {
+        reposView.showToast(msg)
+    }
+
 
 }

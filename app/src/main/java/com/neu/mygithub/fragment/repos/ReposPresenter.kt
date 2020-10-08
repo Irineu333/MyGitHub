@@ -4,5 +4,5 @@ package com.neu.mygithub.fragment.repos
 
 interface ReposPresenter {
 
-    fun getMax(a: Int, b: Int, show : Boolean = false) : Int
+    fun loadRepos()
 }
