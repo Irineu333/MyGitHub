@@ -11,16 +11,18 @@ class DatabaseClient {
     companion object {
         fun load(onLoadRepos: OnLoadRepos) {
             Thread {
+                val handler = Handler(Looper.getMainLooper())
 
                 val listRepos: MutableList<Repo> = mutableListOf()
                 val repoAll = MyApplication.databse.repoDatabaseDao.getRepoAll()
 
                 if (repoAll.isNullOrEmpty()) {
-                    onLoadRepos.onDatabaseFailure("Database vazio")
-
+                    handler.post {
+                        onLoadRepos.onDatabaseFailure("Database vazio")
+                    }
                 } else {
 
-                    val handler = Handler(Looper.getMainLooper())
+
                     repoAll.forEach {
                         val fullName = it.full_name
                         val login = fullName.substring(0, fullName.indexOf("/"))
