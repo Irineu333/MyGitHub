@@ -20,10 +20,15 @@ class ReposPresenterImpl(
 
     override fun onDatabaseResponse(listRepos: List<Repo>) {
         reposView.recyclerAdapter.setRepos(listRepos, "database")
+
     }
 
     override fun onWebResponse(listRepos: List<Repo>) {
         reposView.recyclerAdapter.setRepos(listRepos, "web")
+    }
+
+    override fun onDatabaseFailure(msg: String) {
+        reposView.showToast(msg)
     }
 
     override fun onWebFailure(msg: String) {

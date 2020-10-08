@@ -30,6 +30,9 @@ class WebClient(baseUrl: String = "https://api.github.com/") {
                 if (body != null) {
                     Log.d("Retrofit", "Total: ${body.size}")
                     onLoadRepos.onWebResponse(body)
+
+                    //Atualizar database
+                    DatabaseClient.insertAll(body)
                 } else {
                     onLoadRepos.onWebFailure(response.message())
                 }

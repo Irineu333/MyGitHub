@@ -1,16 +1,22 @@
 package com.neu.mygithub.github.model
 
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 const val SEM_VALOR_INT: Int = -1
 const val SEM_VALOR_STRING: String = ""
 val SEM_VALOR = null
 
+@Entity(tableName = "repository_table")
 data class Repo(
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("id") var id: Int = SEM_VALOR_INT,
     @SerializedName("node_id") var node_id: String = SEM_VALOR_STRING,
     @SerializedName("name") var name: String = SEM_VALOR_STRING,
     @SerializedName("full_name") var full_name: String = SEM_VALOR_STRING,
+    @Ignore
     @SerializedName("owner") var owner: Owner? = SEM_VALOR /* objeto, informações proprietário */,
     @SerializedName("private") var private: Boolean? = SEM_VALOR,
     @SerializedName("html_url") var html_url: String = SEM_VALOR_STRING,
@@ -56,8 +62,10 @@ data class Repo(
     @SerializedName("trees_url") var trees_url: String = SEM_VALOR_STRING
 ) {
 
+    @Entity(tableName = "author_table")
     data class Owner(
         @SerializedName("login") val login: String = SEM_VALOR_STRING,
+        @PrimaryKey(autoGenerate = true)
         @SerializedName("id") val id: Int = SEM_VALOR_INT,
         @SerializedName("node_id") val node_id: String = SEM_VALOR_STRING,
         @SerializedName("avatar_url") val avatar_url: String = SEM_VALOR_STRING,
