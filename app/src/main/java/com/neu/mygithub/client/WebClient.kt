@@ -23,20 +23,23 @@ class WebClient(baseUrl: String = "https://api.github.com/") {
     }
 
     fun listPublic(onLoadRepos: OnLoadRepos) {
+
         val call: Call<List<Repo>> = service.listPublic()
+
         call.enqueue(object : Callback<List<Repo>> {
             override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
                 val body = response.body()
-                if (body != null) {
+                if (body.isNullOrEmpty()) {
+                    onLoadRepos.onWebFailure(response.message())
+                } else {
                     Log.d("Retrofit", "Total: ${body.size}")
                     onLoadRepos.onWebResponse(body)
 
                     //Atualizar database
                     DatabaseClient.insertAll(body)
-                } else {
-                    onLoadRepos.onWebFailure(response.message())
                 }
             }
+
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
                 onLoadRepos.onWebFailure(t.message.toString())
             }

@@ -15,24 +15,21 @@ class DatabaseClient {
                 val listRepos: MutableList<Repo> = mutableListOf()
                 val repoAll = MyApplication.databse.repoDatabaseDao.getRepoAll()
 
-                if (repoAll != null && repoAll.isNotEmpty()) {
+                if (repoAll.isNullOrEmpty()) {
+                    onLoadRepos.onDatabaseFailure("Database vazio")
+
+                } else {
+
                     val handler = Handler(Looper.getMainLooper())
                     repoAll.forEach {
                         val fullName = it.full_name
-                        it.owner = MyApplication.databse.repoDatabaseDao.getOwner(
-                            fullName.substring(
-                                0,
-                                fullName.indexOf("/")
-                            )
-                        )
+                        val login = fullName.substring(0, fullName.indexOf("/"))
+                        it.owner = MyApplication.databse.repoDatabaseDao.getOwner(login)
                         listRepos.add(it)
                     }
                     handler.post {
                         onLoadRepos.onDatabaseResponse(listRepos)
                     }
-
-                } else {
-                    onLoadRepos.onDatabaseFailure("Database vazio")
                 }
             }.start()
         }
