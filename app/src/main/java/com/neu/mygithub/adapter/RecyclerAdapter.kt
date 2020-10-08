@@ -5,8 +5,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.neu.mygithub.R
 import com.neu.mygithub.github.model.Repo
 
@@ -23,6 +25,7 @@ class RecyclerAdapter(
         private val nameTextView : TextView = itemView.findViewById(R.id.nameTextView)
         private val loginTextView : TextView = itemView.findViewById(R.id.loginTextView)
         private val origemTextView : TextView = itemView.findViewById(R.id.originTextView)
+        val avatarImageView : ImageView = itemView.findViewById(R.id.avatarImageView)
 
         fun atualiza(repoName : String, userLogin: String, origem: String)
         {
@@ -59,6 +62,10 @@ class RecyclerAdapter(
 
         //configura MyHolder
         holder.atualiza(repoName, userLogin, origem)
+
+        //avatar
+        Glide.with(context).load(repo.owner?.avatar_url).placeholder(R.drawable.ic_imagem)
+            .into(holder.avatarImageView)
 
         holder.itemView.setOnClickListener {
             onClickListener.onClick(repo)
