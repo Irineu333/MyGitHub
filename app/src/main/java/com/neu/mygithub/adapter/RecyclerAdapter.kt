@@ -16,23 +16,27 @@ class RecyclerAdapter(
     private val onClickListener: OnClickListener
 ) : RecyclerView.Adapter<RecyclerAdapter.MyHolder>() {
 
+    var origem = ""
 
     class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val nameTextView : TextView = itemView.findViewById(R.id.nameTextView)
         private val loginTextView : TextView = itemView.findViewById(R.id.loginTextView)
+        private val origemTextView : TextView = itemView.findViewById(R.id.originTextView)
 
-        fun atualiza(repoName : String, userLogin: String)
+        fun atualiza(repoName : String, userLogin: String, origem: String)
         {
             nameTextView.text = repoName
             loginTextView.text = userLogin
+            origemTextView.text = origem
         }
     }
 
     fun setRepos(listRepos : List<Repo>, origem : String = "")
     {
         this.listRepos = listRepos.toMutableList()
-        Log.d("RecyclerAdapter", "setRepos $origem, count ${listRepos.size} == ${this.listRepos.size}")
+        Log.d("RecyclerAdapter", "setRepos $origem, count ${listRepos.size}")
+        this.origem = origem
         notifyDataSetChanged()
     }
 
@@ -54,7 +58,7 @@ class RecyclerAdapter(
         val userLogin = author?.login ?: "nulo"
 
         //configura MyHolder
-        holder.atualiza(repoName, userLogin)
+        holder.atualiza(repoName, userLogin, origem)
 
         holder.itemView.setOnClickListener {
             onClickListener.onClick(repo)
