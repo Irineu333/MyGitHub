@@ -1,4 +1,4 @@
-package com.neu.mygithub.data
+package com.neu.mygithub.client
 
 import com.neu.mygithub.github.model.Repo
 

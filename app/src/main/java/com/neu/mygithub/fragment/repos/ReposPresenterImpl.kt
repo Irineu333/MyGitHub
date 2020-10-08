@@ -1,8 +1,8 @@
 package com.neu.mygithub.fragment.repos
 
 import android.content.Context
-import com.neu.mygithub.data.OnLoadRepos
-import com.neu.mygithub.data.loadRepos
+import com.neu.mygithub.client.OnLoadRepos
+import com.neu.mygithub.client.loadRepos
 import com.neu.mygithub.github.model.Repo
 
 /**
