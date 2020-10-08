@@ -7,7 +7,7 @@ import android.content.Context
  * e notifica pela ReposView alterações visuais */
 
 class ReposPresenterImpl(
-    private val contexto: Context,
+    private val context: Context,
     private val reposView: ReposView /*notifica ReposFragment*/
 ) : ReposPresenter {
 
