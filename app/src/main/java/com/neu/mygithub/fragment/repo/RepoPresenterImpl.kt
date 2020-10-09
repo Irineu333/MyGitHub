@@ -27,6 +27,10 @@ class RepoPresenterImpl(
         }
     }
 
+    override fun configEditar() {
+
+    }
+
     private fun setRepoInfos(repo : Repo)
     {
         val userLogin = repo.owner!!.login

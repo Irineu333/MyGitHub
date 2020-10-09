@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -19,9 +20,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
 
-                android:padding="4dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="4dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatarImageView_Repo"
@@ -48,18 +49,18 @@
                     tools:text="Irineu A. Silva" />
 
                 <ImageButton
-                    android:id="@+id/infoImageView"
+                    android:id="@+id/infoImageBtn"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center_vertical"
-                    android:padding="11dp"
                     android:background="@drawable/ripple_bordered"
+                    android:contentDescription="@string/clique_para_saber_mais_sobre_o_autor"
+                    android:padding="11dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_info"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/clique_para_saber_mais_sobre_o_autor" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -67,24 +68,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:padding="4dp"
             android:layout_height="?actionBarSize"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            android:padding="4dp">
 
             <ImageButton
-                android:id="@+id/backImageView"
+                android:id="@+id/backBtn"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/ripple_bordered"
+                android:contentDescription="@string/clique_para_voltar"
                 android:paddingStart="18dp"
                 android:paddingEnd="6dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/clique_para_voltar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/nameTextView_Repo"
@@ -92,26 +93,41 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textColor="#FFFFFF"
-                android:textSize="25sp"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/backImageView"
+                app:layout_constraintStart_toEndOf="@+id/backBtn"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.40"
                 tools:text="@string/app_name" />
 
             <ImageButton
-                android:id="@+id/openImageView"
+                android:id="@+id/editBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/ripple_bordered"
+                android:contentDescription="@string/clique_para_editar"
+                android:padding="11dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/openBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/openBtn"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/ripple_bordered"
+                android:contentDescription="@string/clique_para_abrir_no_navegador"
                 android:padding="11dp"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_open"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="@string/clique_para_abrir_no_navegador" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -127,5 +143,64 @@
         <include layout="@layout/repo_infos" />
 
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.card.MaterialCardView
+
+        style="@style/Widget.MaterialComponents.BottomSheet.Modal"
+        android:id="@+id/bottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_peekHeight="45dp"
+        app:behavior_hideable = "true"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="45dp"
+               android:background="@color/colorPrimary"
+               android:padding="2dp">
+
+               <TextView
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:text="Editar"
+                   android:paddingStart="8dp"
+                   android:paddingEnd="0dp"
+                   android:gravity="center_vertical"
+                   android:layout_weight="1"
+                   android:textColor="#FFFFFF"
+                   android:textSize="20sp" />
+
+               <ImageButton
+                   android:id="@+id/collapseEditorBtn"
+                   android:layout_width="50dp"
+                   android:layout_height="50dp"
+                   android:layout_gravity="center_vertical"
+                   android:background="@drawable/ripple_bordered"
+                   android:paddingStart="18dp"
+                   android:paddingEnd="10dp"
+                   android:scaleType="fitCenter"
+                   android:rotation="270"
+                   android:src="@drawable/ic_back"/>
+
+               <ImageButton
+                   android:id="@+id/closeEditorBtn"
+                   android:layout_width="50dp"
+                   android:layout_height="50dp"
+                   android:layout_gravity="center_vertical"
+                   android:background="@drawable/ripple_bordered"
+                   android:padding="11dp"
+                   android:scaleType="fitCenter"
+                   android:src="@drawable/ic_close"/>
+
+           </LinearLayout>
+           <include layout="@layout/repo_editor"/>
+       </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

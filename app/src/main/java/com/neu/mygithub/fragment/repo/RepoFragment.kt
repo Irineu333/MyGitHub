@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.card.MaterialCardView
 import com.neu.mygithub.R
 import kotlinx.android.synthetic.main.fragment_repo.*
 import kotlinx.android.synthetic.main.repo_infos.*
@@ -42,11 +44,37 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
         repoPresenter.loadAndSetRepoOfArgs(requireArguments())
         repoPresenter.configGoToRepoUrlBtn()
         configBackBtn()
+
+        val from = BottomSheetBehavior.from(bottomSheet)
+        from.state = BottomSheetBehavior.STATE_HIDDEN
+
+        editBtn.setOnClickListener {
+            from.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        closeEditorBtn.setOnClickListener {
+            from.state = BottomSheetBehavior.STATE_HIDDEN
+        }
+
+        configCollapseBtn(from)
+    }
+
+    private fun configCollapseBtn(from: BottomSheetBehavior<MaterialCardView>) {
+        collapseEditorBtn.setOnClickListener {
+            from.state = BottomSheetBehavior.STATE_COLLAPSED
+            collapseEditorBtn.rotation = 180f
+
+            collapseEditorBtn.setOnClickListener {
+                from.state = BottomSheetBehavior.STATE_EXPANDED
+                collapseEditorBtn.rotation = 0f
+                configCollapseBtn(from)
+            }
+        }
     }
 
     private fun configBackBtn() {
         //Isso é uma regra de negócio??
-        backImageView.setOnClickListener {
+        backBtn.setOnClickListener {
             activity?.onBackPressed()
         }
     }
@@ -75,7 +103,7 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
     }
 
     override fun setGoToRepoUrlOnClick(listener: View.OnClickListener) {
-        openImageView.setOnClickListener(listener)
+        openBtn.setOnClickListener(listener)
     }
 
 }

@@ -6,4 +6,6 @@
     <string name="clique_para_saber_mais_sobre_o_autor">Clique para saber mais sobre o autor</string>
     <string name="full_name">Full name</string>
     <string name="descri_o">Descrição</string>
+    <string name="carregar_mais">Carregar Mais</string>
+    <string name="clique_para_editar">Clique para editar</string>
 </resources>

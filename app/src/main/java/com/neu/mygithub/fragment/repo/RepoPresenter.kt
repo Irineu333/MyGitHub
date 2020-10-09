@@ -7,4 +7,5 @@ import android.os.Bundle
 interface RepoPresenter {
     fun loadAndSetRepoOfArgs(args : Bundle)
     fun configGoToRepoUrlBtn()
+    fun configEditar()
 }
