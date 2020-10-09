@@ -1,5 +1,7 @@
 package com.neu.mygithub.github.model
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
@@ -60,7 +62,58 @@ data class Repo(
     @SerializedName("tags_url") var tags_url: String = SEM_VALOR_STRING,
     @SerializedName("teams_url") var teams_url: String = SEM_VALOR_STRING,
     @SerializedName("trees_url") var trees_url: String = SEM_VALOR_STRING
-) {
+) : Parcelable {
+
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readParcelable(Owner::class.java.classLoader),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
+        parcel.readString()!!,
+        parcel.readString(),
+        parcel.readValue(Boolean::class.java.classLoader) as? Boolean,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!,
+        parcel.readString()!!
+    ) {
+    }
 
     @Entity(tableName = "author_table")
     data class Owner(
@@ -83,5 +136,126 @@ data class Repo(
         @SerializedName("received_events_url") val received_events_url: String = SEM_VALOR_STRING,
         @SerializedName("type") val type: String = SEM_VALOR_STRING,
         @SerializedName("site_admin") val site_admin: Boolean? = SEM_VALOR
-    )
+    ) : Parcelable {
+        constructor(parcel: Parcel) : this(
+            parcel.readString()!!,
+            parcel.readInt(),
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readString()!!,
+            parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        ) {
+        }
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) {
+            parcel.writeString(login)
+            parcel.writeInt(id)
+            parcel.writeString(node_id)
+            parcel.writeString(avatar_url)
+            parcel.writeString(gravatar_id)
+            parcel.writeString(url)
+            parcel.writeString(html_url)
+            parcel.writeString(followers_url)
+            parcel.writeString(following_url)
+            parcel.writeString(gists_url)
+            parcel.writeString(starred_url)
+            parcel.writeString(subscriptions_url)
+            parcel.writeString(organizations_url)
+            parcel.writeString(repos_url)
+            parcel.writeString(events_url)
+            parcel.writeString(received_events_url)
+            parcel.writeString(type)
+            parcel.writeValue(site_admin)
+        }
+
+        override fun describeContents(): Int {
+            return 0
+        }
+
+        companion object CREATOR : Parcelable.Creator<Owner> {
+            override fun createFromParcel(parcel: Parcel): Owner {
+                return Owner(parcel)
+            }
+
+            override fun newArray(size: Int): Array<Owner?> {
+                return arrayOfNulls(size)
+            }
+        }
+    }
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(node_id)
+        parcel.writeString(name)
+        parcel.writeString(full_name)
+        parcel.writeParcelable(owner, flags)
+        parcel.writeValue(private)
+        parcel.writeString(html_url)
+        parcel.writeString(description)
+        parcel.writeValue(fork)
+        parcel.writeString(url)
+        parcel.writeString(archive_url)
+        parcel.writeString(assignees_url)
+        parcel.writeString(blobs_url)
+        parcel.writeString(branches_url)
+        parcel.writeString(collaborators_url)
+        parcel.writeString(comments_url)
+        parcel.writeString(commits_url)
+        parcel.writeString(compare_url)
+        parcel.writeString(contents_url)
+        parcel.writeString(contributors_url)
+        parcel.writeString(deployments_url)
+        parcel.writeString(downloads_url)
+        parcel.writeString(events_url)
+        parcel.writeString(forks_url)
+        parcel.writeString(git_commits_url)
+        parcel.writeString(git_refs_url)
+        parcel.writeString(git_tags_url)
+        parcel.writeString(git_url)
+        parcel.writeString(issue_comment_url)
+        parcel.writeString(issue_events_url)
+        parcel.writeString(issues_url)
+        parcel.writeString(keys_urls_url)
+        parcel.writeString(labels_url)
+        parcel.writeString(languages_url)
+        parcel.writeString(merges_url)
+        parcel.writeString(milestones_url)
+        parcel.writeString(notifications_url)
+        parcel.writeString(pulls_url)
+        parcel.writeString(releases_url)
+        parcel.writeString(ssh_url)
+        parcel.writeString(stargazers_url)
+        parcel.writeString(statuses_url)
+        parcel.writeString(subscribers_url)
+        parcel.writeString(subscription_url)
+        parcel.writeString(tags_url)
+        parcel.writeString(teams_url)
+        parcel.writeString(trees_url)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Repo> {
+        override fun createFromParcel(parcel: Parcel): Repo {
+            return Repo(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Repo?> {
+            return arrayOfNulls(size)
+        }
+    }
 }

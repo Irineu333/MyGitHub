@@ -15,12 +15,28 @@
             android:id="@+id/action_splashFragment_to_reposFragment"
             app:destination="@id/reposFragment"
             app:popUpTo="@id/my_navigation"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/fragment_close_enter" />
     </fragment>
 
     <fragment
         android:id="@+id/reposFragment"
         android:name="com.neu.mygithub.fragment.repos.ReposFragment"
         android:label="fragment_repos"
-        tools:layout="@layout/fragment_repos" />
+        tools:layout="@layout/fragment_repos" >
+        <action
+            android:id="@+id/action_reposFragment_to_repoFragment"
+            app:destination="@id/repoFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_enter" />
+    </fragment>
+    <fragment
+        android:id="@+id/repoFragment"
+        android:name="com.neu.mygithub.fragment.repo.RepoFragment"
+        android:label="repo_fragment"
+        tools:layout="@layout/fragment_repo" >
+        <argument
+            android:name="Repo"
+            app:argType="com.neu.mygithub.github.model.Repo" />
+    </fragment>
 </navigation>

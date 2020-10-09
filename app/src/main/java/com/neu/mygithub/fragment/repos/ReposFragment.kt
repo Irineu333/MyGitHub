@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.neu.mygithub.R
 import com.neu.mygithub.adapter.RecyclerAdapter
 import com.neu.mygithub.github.model.Repo
@@ -32,7 +33,7 @@ class ReposFragment() : Fragment(), ReposView, RecyclerAdapter.OnClickListener {
         super.onCreate(savedInstanceState)
         Log.d("ReposFragment", "onCreate")
 
-        //Inicializa propriedade reposPresenter
+        //Inicializar propriedade reposPresenter
         reposPresenter = getPresenter()
     }
 
@@ -63,7 +64,9 @@ class ReposFragment() : Fragment(), ReposView, RecyclerAdapter.OnClickListener {
     }
 
     //RecyclerAdapter.OnClickListener
-    override fun onClick(data: Repo) {
-        //
+    override fun onClick(repo: Repo) {
+        val action =
+            ReposFragmentDirections.actionReposFragmentToRepoFragment(repo)
+        findNavController().navigate(action)
     }
 }
