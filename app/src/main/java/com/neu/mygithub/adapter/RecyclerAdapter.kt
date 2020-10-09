@@ -27,10 +27,10 @@ class RecyclerAdapter(
         private val origemTextView : TextView = itemView.findViewById(R.id.originTextView)
         val avatarImageView : ImageView = itemView.findViewById(R.id.avatarImageView)
 
-        fun atualiza(repoName : String, userLogin: String, origem: String)
+        fun atualiza(userLogin: String, repoName : String, origem: String)
         {
-            nameTextView.text = repoName
             loginTextView.text = userLogin
+            nameTextView.text = repoName
             origemTextView.text = origem
         }
     }

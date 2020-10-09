@@ -7,6 +7,8 @@ import com.neu.mygithub.adapter.RecyclerAdapter
  * para notificação de alterações visuais */
 
 interface ReposView {
+    //Variáveis
     val recyclerAdapter : RecyclerAdapter
+    //Funções
     fun showToast(msg : Any)
 }

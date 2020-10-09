@@ -12,6 +12,9 @@ import com.neu.mygithub.adapter.RecyclerAdapter
 import com.neu.mygithub.github.model.Repo
 import kotlinx.android.synthetic.main.fragment_repos.*
 
+/** Tela de repositórios públicos
+ *  @author Irineu A. Silva
+ */
 
 class ReposFragment() : Fragment(), ReposView, RecyclerAdapter.OnClickListener {
 
@@ -39,8 +42,6 @@ class ReposFragment() : Fragment(), ReposView, RecyclerAdapter.OnClickListener {
     ): View? {
         Log.d("ReposFragment", "onCreateView")
 
-        reposPresenter.loadRepos()
-
         return inflater.inflate(R.layout.fragment_repos, container, false)
     }
 
@@ -51,7 +52,9 @@ class ReposFragment() : Fragment(), ReposView, RecyclerAdapter.OnClickListener {
         //Inicializa o adapter e seta no RecyclerView
         recyclerAdapter = RecyclerAdapter(requireContext(), onClickListener = this)
         recyclerView.adapter = recyclerAdapter
-        //
+
+        //Carregar os repositórios
+        reposPresenter.loadRepos()
     }
 
     override fun showToast(msg: Any) {

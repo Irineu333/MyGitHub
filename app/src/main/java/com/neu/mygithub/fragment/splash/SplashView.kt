@@ -5,5 +5,6 @@ package com.neu.mygithub.fragment.splash
  * para notificação de alterações visuais */
 
 interface SplashView {
+    //Funções
     fun navigateToReposFragment()
 }

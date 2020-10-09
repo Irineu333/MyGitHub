@@ -9,9 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.neu.mygithub.R
 
+/** Pseudo tela de carregamento anterior a tela de repositórios, ReposFragment /
+ *  @author Irineu A. Silva
+ */
+
 class SplashFragment : Fragment(), SplashView {
 
-    private lateinit var splashPresenter : SplashPresenter
+    private lateinit var splashPresenter: SplashPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("SplashFragment", "onCreate")
@@ -23,7 +27,9 @@ class SplashFragment : Fragment(), SplashView {
         //Iniciando timer para navegar até ReposFragment
         splashPresenter.startTime()
     }
+
     override fun navigateToReposFragment() {
+        /** Navega para ReposFragment*/
         val action =
             SplashFragmentDirections.actionSplashFragmentToReposFragment()
         findNavController().navigate(action)

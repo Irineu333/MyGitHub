@@ -12,12 +12,14 @@ import com.neu.mygithub.github.model.Repo
 class ReposPresenterImpl(
     private val context: Context,
     private val reposView: ReposView /*notifica ReposFragment*/
-) : ReposPresenter,OnLoadRepos {
+) : ReposPresenter, OnLoadRepos {
 
+    //ReposPresenter
     override fun loadRepos() {
         loadRepos(this)
     }
 
+    //OnLoadRepos
     override fun onDatabaseResponse(listRepos: List<Repo>) {
         reposView.recyclerAdapter.setRepos(listRepos, "database")
 
