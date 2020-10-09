@@ -15,6 +15,7 @@ import com.neu.mygithub.R
 
 class SplashFragment : Fragment(), SplashView {
 
+    //SplashPresenter's ref
     private lateinit var splashPresenter: SplashPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,13 +29,6 @@ class SplashFragment : Fragment(), SplashView {
         splashPresenter.startTime()
     }
 
-    override fun navigateToReposFragment() {
-        /** Navega para ReposFragment*/
-        val action =
-            SplashFragmentDirections.actionSplashFragmentToReposFragment()
-        findNavController().navigate(action)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,5 +36,14 @@ class SplashFragment : Fragment(), SplashView {
         Log.d("SplashFragment", "onCreateView")
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
+
+    //SplashView
+    override fun navigateToReposFragment() {
+        /** Navega para ReposFragment*/
+        val action =
+            SplashFragmentDirections.actionSplashFragmentToReposFragment()
+        findNavController().navigate(action)
+    }
+
 
 }

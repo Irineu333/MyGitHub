@@ -57,10 +57,12 @@ class ReposFragment() : Fragment(), ReposView, RecyclerAdapter.OnClickListener {
         reposPresenter.loadRepos()
     }
 
+    //ReposView
     override fun showToast(msg: Any) {
         Toast.makeText(requireContext(), msg.toString(), Toast.LENGTH_SHORT).show()
     }
 
+    //RecyclerAdapter.OnClickListener
     override fun onClick(data: Repo) {
         //
     }
