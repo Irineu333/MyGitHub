@@ -18,7 +18,7 @@ class DatabaseClient {
 
                 if (repoAll.isNullOrEmpty()) {
                     handler.post {
-                        onLoadRepos.onDatabaseFailure("Database vazio")
+                        onLoadRepos.onDatabaseFailure("Sem dados locais")
                     }
                 } else {
 
@@ -27,6 +27,7 @@ class DatabaseClient {
                         val fullName = it.full_name
                         val login = fullName.substring(0, fullName.indexOf("/"))
                         it.owner = MyApplication.databse.repoDatabaseDao.getOwner(login)
+
                         listRepos.add(it)
                     }
                     handler.post {
@@ -39,7 +40,7 @@ class DatabaseClient {
         fun insertAll(listaRepos: List<Repo>) {
             Thread {
                 listaRepos.forEach {
-                    MyApplication.databse.repoDatabaseDao.insert(it, it.owner!!)
+                    MyApplication.databse.repoDatabaseDao.insert(it, it.owner!! /* nulidade improvável */)
                 }
                 Log.d("insertAll", "Total ${listaRepos.size}")
             }.start()
