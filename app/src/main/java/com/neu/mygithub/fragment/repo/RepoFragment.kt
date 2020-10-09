@@ -14,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 import com.neu.mygithub.R
 import kotlinx.android.synthetic.main.fragment_repo.*
+import kotlinx.android.synthetic.main.repo_editor.*
 import kotlinx.android.synthetic.main.repo_infos.*
 
 class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
@@ -45,6 +46,9 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
         repoPresenter.configGoToRepoUrlBtn()
         configBackBtn()
 
+
+        //Passar para MVP
+
         val from = BottomSheetBehavior.from(bottomSheet)
         from.state = BottomSheetBehavior.STATE_HIDDEN
 
@@ -57,16 +61,23 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
         }
 
         configCollapseBtn(from)
+
+        alterarBtn.setOnClickListener {
+
+            val repoName = repoName_Editor.text.toString()
+            val userLogin = userLogin_Editor.text.toString()
+            val description = description_Editor.text.toString()
+        }
     }
 
     private fun configCollapseBtn(from: BottomSheetBehavior<MaterialCardView>) {
         collapseEditorBtn.setOnClickListener {
             from.state = BottomSheetBehavior.STATE_COLLAPSED
-            collapseEditorBtn.rotation = 180f
+            collapseEditorBtn.rotation = 90f
 
             collapseEditorBtn.setOnClickListener {
                 from.state = BottomSheetBehavior.STATE_EXPANDED
-                collapseEditorBtn.rotation = 0f
+                collapseEditorBtn.rotation = 270f
                 configCollapseBtn(from)
             }
         }

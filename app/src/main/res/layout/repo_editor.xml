@@ -12,6 +12,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:singleLine="true"
+            android:id="@+id/repoName_Editor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nome do Repositório" />
@@ -25,6 +26,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:singleLine="true"
+            android:id="@+id/userLogin_Editor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Login do usuário" />
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/description_Editor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Descrição" />
@@ -45,9 +48,9 @@
 
     <Button
         android:layout_marginTop="8dp"
-        android:id="@+id/button"
+        android:id="@+id/alterarBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enviar" />
+        android:text="Alterar" />
 
 </LinearLayout>
