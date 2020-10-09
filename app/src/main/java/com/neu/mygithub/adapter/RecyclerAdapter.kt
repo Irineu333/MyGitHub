@@ -5,12 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.neu.mygithub.R
 import com.neu.mygithub.github.model.Repo
+import de.hdodenhof.circleimageview.CircleImageView
 
 class RecyclerAdapter(
     private val context: Context,
@@ -22,10 +22,10 @@ class RecyclerAdapter(
 
     class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val nameTextView : TextView = itemView.findViewById(R.id.nameTextView)
-        private val loginTextView : TextView = itemView.findViewById(R.id.loginTextView)
+        private val nameTextView : TextView = itemView.findViewById(R.id.nameTextView_Recycler)
+        private val loginTextView : TextView = itemView.findViewById(R.id.loginTextView_Recycler)
         private val origemTextView : TextView = itemView.findViewById(R.id.originTextView)
-        val avatarImageView : ImageView = itemView.findViewById(R.id.avatarImageView)
+        val avatarImageView : CircleImageView = itemView.findViewById(R.id.avatarImageView_Recycler)
 
         fun atualiza(userLogin: String, repoName : String, origem: String)
         {
@@ -64,7 +64,7 @@ class RecyclerAdapter(
         holder.atualiza(repoName, userLogin, origem)
 
         //avatar
-        Glide.with(context).load(repo.owner?.avatar_url).placeholder(R.drawable.ic_imagem)
+        Glide.with(context).load(repo.owner?.avatar_url).placeholder(R.drawable.ic_image)
             .into(holder.avatarImageView)
 
         holder.itemView.setOnClickListener {
