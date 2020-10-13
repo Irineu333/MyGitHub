@@ -6,6 +6,11 @@ import android.util.Log
 import com.neu.mygithub.MyApplication
 import com.neu.mygithub.github.model.Repo
 
+
+/** Classe que controla as solicitações ao database local com Room
+ *  @author Irineu A. Silva
+ */
+
 class DatabaseClient {
 
     companion object {

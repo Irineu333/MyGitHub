@@ -12,6 +12,11 @@ import com.neu.mygithub.R
 import com.neu.mygithub.github.model.Repo
 import de.hdodenhof.circleimageview.CircleImageView
 
+
+/**
+ *  @author Irineu A. Silva
+ */
+
 class RecyclerAdapter(
     private val context: Context,
     private var listRepos: MutableList<Repo> = mutableListOf(),

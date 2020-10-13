@@ -2,6 +2,10 @@ package com.neu.mygithub.client
 
 import com.neu.mygithub.github.model.Repo
 
+
+/** Função que inicia carregamento das repos
+ *  @author Irineu A. Silva
+ */
 fun loadRepos(onLoadRepos: OnLoadRepos)
 {
     //Carregar dados locais

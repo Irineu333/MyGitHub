@@ -131,13 +131,13 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
                 val userLogin = userLogin_Editor.text.toString()
                 val description = description_Editor.text.toString()
 
-                if(repoName.isEmpty())
+                if (repoName.isEmpty())
                     repoName_Editor.error = "Nome inválido"
-                if(userLogin.isEmpty())
+                if (userLogin.isEmpty())
                     userLogin_Editor.error = "Login inválido"
 
-                if(repoName.isNotEmpty()&&userLogin.isNotEmpty())
-                repoPresenter.update(repoName, userLogin, description)
+                if (repoName.isNotEmpty() && userLogin.isNotEmpty())
+                    repoPresenter.update(repoName, userLogin, description)
                 else
                     showToast("Não foi alterado nada")
             }

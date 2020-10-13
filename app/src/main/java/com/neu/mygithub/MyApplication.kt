@@ -15,7 +15,7 @@ class MyApplication : Application() {
         //Obtendo instância de RepoDatabase implementada pelo RoomDatabase
         databse = RepoDatabase.getInstance(this)
 
-        //Iniciando Stetho
+        //Iniciando Stetho (para debug)
         val builder = Stetho.newInitializerBuilder(this)
         builder.enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
         val initializer = builder.build()

@@ -9,6 +9,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+/** Classe que controla as requisições web usando Retrofit
+ *  @author Irineu A. Silva
+ */
 
 class WebClient(baseUrl: String = "https://api.github.com/") {
 
