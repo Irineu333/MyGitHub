@@ -7,3 +7,4 @@ Room Database <br/>
 Navigation Component <br/>
 Kotlin [linguagem usada] <br/>
 Arquitetura MVP (Model View Presenter)
+# Android Studio
