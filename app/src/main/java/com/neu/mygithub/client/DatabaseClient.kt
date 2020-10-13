@@ -45,5 +45,27 @@ class DatabaseClient {
                 Log.d("insertAll", "Total ${listaRepos.size}")
             }.start()
         }
+
+        fun getRepoAtId(id : Int, onLocalLoad: OnLocalLoad) {
+            Thread {
+                val repo = MyApplication.databse.repoDatabaseDao.getRepoAtId(id)
+                if(repo == null)
+                {
+                    onLocalLoad.onFail("Repositório não encontrado")
+                } else {
+                    val fullName = repo.full_name
+                    val login = fullName.substring(0, fullName.indexOf("/"))
+                    repo.owner = MyApplication.databse.repoDatabaseDao.getOwner(login)
+
+                    onLocalLoad.onLoad(repo)
+                }
+            }.start()
+        }
+    }
+
+    interface OnLocalLoad
+    {
+        fun onLoad(repo : Repo)
+        fun onFail(msg : String)
     }
 }
