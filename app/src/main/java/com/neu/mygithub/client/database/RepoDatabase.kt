@@ -13,6 +13,9 @@ abstract class RepoDatabase : RoomDatabase(){
         @Volatile
         private var instance: RepoDatabase? = null
 
+        /** Inicialização do banco de dados
+         *  @author Irineu A. Silva
+         */
         fun getInstance(context : Context) : RepoDatabase
         {
             synchronized(this) /* para evitar mais de uma instanciação */ {

@@ -68,6 +68,10 @@ class DatabaseClient {
         }
     }
 
+    /** interface para notificação de falha ou êxito
+     *  @author Irineu A. Silva
+     */
+
     interface OnLocalLoad
     {
         fun onLoad(repo : Repo)

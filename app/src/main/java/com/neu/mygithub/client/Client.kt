@@ -16,6 +16,10 @@ fun loadRepos(onLoadRepos: OnLoadRepos)
     web.listPublic(onLoadRepos)
 }
 
+
+/** interface para notificação de falha ou êxito
+ *  @author Irineu A. Silva
+ */
 interface OnLoadRepos {
     fun onDatabaseResponse(listRepos: List<Repo>)
     fun onWebResponse(listRepos : List<Repo>)
