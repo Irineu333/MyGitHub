@@ -21,7 +21,6 @@ import kotlinx.android.synthetic.main.repo_infos.*
  *  @author Irineu A. Silva
  */
 
-
 class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
 
     //RepoPresenter's ref
@@ -61,7 +60,7 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
         behavior = BottomSheetBehavior.from(bottomSheet)
         behaviorHidden()
 
-        //OnClickListener
+        //OnClickListeners
         editBtn.setOnClickListener(onClick)
         closeEditorBtn.setOnClickListener(onClick)
         collapseEditorBtn.setOnClickListener(onClick)
@@ -110,7 +109,6 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
         startActivity(Intent(Intent.ACTION_VIEW).setData(uri))
     }
 
-
     override fun collapse() {
         val from = BottomSheetBehavior.from(bottomSheet)
         from.state = BottomSheetBehavior.STATE_HIDDEN
@@ -133,6 +131,12 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
                 val userLogin = userLogin_Editor.text.toString()
                 val description = description_Editor.text.toString()
 
+                if(repoName.isEmpty())
+                    repoName_Editor.error = "Nome inválido"
+                if(userLogin.isEmpty())
+                    userLogin_Editor.error = "Login inválido"
+
+                if(repoName.isNotEmpty()&&userLogin.isNotEmpty())
                 repoPresenter.update(repoName, userLogin, description)
             }
             R.id.editBtn -> {

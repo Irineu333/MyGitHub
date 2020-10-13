@@ -33,11 +33,8 @@ class RepoPresenterImpl(
 
     override fun update(repoName: String, userLogin: String, description: String) {
 
-       if(!repoName.isEmpty())
         repo.name = repoName
-        if(!userLogin.isEmpty())
         repo.owner!!.login = userLogin
-        if(!description.isEmpty())
         repo.description = description
 
         //Atualizar o full_name
