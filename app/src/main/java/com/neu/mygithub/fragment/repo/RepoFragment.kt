@@ -138,6 +138,8 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
 
                 if(repoName.isNotEmpty()&&userLogin.isNotEmpty())
                 repoPresenter.update(repoName, userLogin, description)
+                else
+                    showToast("Não foi alterado nada")
             }
             R.id.editBtn -> {
                 repoName_Editor.setText(repoPresenter.repo.name)
