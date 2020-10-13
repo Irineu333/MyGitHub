@@ -24,6 +24,7 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
 
     //from interface RepoView
     override lateinit var avatarImageView: ImageView
+    override lateinit var behavior: BottomSheetBehavior<MaterialCardView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,49 +43,70 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        repoPresenter.loadAndSetRepoOfArgs(requireArguments())
-        repoPresenter.configGoToRepoUrlBtn()
+        //Carregar o repositório
+        repoPresenter.getRepoOfArgs(requireArguments())
+
+        //Botões
+        openBtn.setOnClickListener {
+            goToUrl(repoPresenter.getUrlRepo())
+        }
         configBackBtn()
 
-
-        //Passar para MVP
-
-        val from = BottomSheetBehavior.from(bottomSheet)
-        from.state = BottomSheetBehavior.STATE_HIDDEN
+        //Inicializar BottomSheetBehavior
+        behavior = BottomSheetBehavior.from(bottomSheet)
+        behaviorHidden()
 
         editBtn.setOnClickListener {
-            from.state = BottomSheetBehavior.STATE_EXPANDED
+            repoName_Editor.setText(repoPresenter.repo.name)
+            userLogin_Editor.setText(repoPresenter.repo.owner?.login)
+            description_Editor.setText(repoPresenter.repo.description)
+            behaviorExpanded()
         }
 
         closeEditorBtn.setOnClickListener {
-            from.state = BottomSheetBehavior.STATE_HIDDEN
+            behaviorHidden()
         }
 
-        configCollapseBtn(from)
+        configExpandeAndCollapseBtn()
+
 
         alterarBtn.setOnClickListener {
 
             val repoName = repoName_Editor.text.toString()
             val userLogin = userLogin_Editor.text.toString()
             val description = description_Editor.text.toString()
+
+            repoPresenter.update(repoName, userLogin, description)
         }
     }
 
-    private fun configCollapseBtn(from: BottomSheetBehavior<MaterialCardView>) {
-        collapseEditorBtn.setOnClickListener {
-            from.state = BottomSheetBehavior.STATE_COLLAPSED
-            collapseEditorBtn.rotation = 90f
+    private fun behaviorExpanded() {
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        collapseEditorBtn.rotation = 90f
+    }
 
-            collapseEditorBtn.setOnClickListener {
-                from.state = BottomSheetBehavior.STATE_EXPANDED
-                collapseEditorBtn.rotation = 270f
-                configCollapseBtn(from)
+    private fun behaviorHidden() {
+        behavior.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+    private fun behaviorCollapse() {
+        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        collapseEditorBtn.rotation = 270f
+    }
+
+    private fun configExpandeAndCollapseBtn() {
+
+        collapseEditorBtn.setOnClickListener {
+
+            if (behavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                behaviorCollapse()
+            } else if (behavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                behaviorExpanded()
             }
         }
     }
 
+
     private fun configBackBtn() {
-        //Isso é uma regra de negócio??
         backBtn.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -96,12 +118,16 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
     }
 
     //from interface RepoView
-    override fun showToast(msg : String)
-    {
+    override fun showToast(msg: String) {
         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
-    override fun setRepoInfos(userLogin : String, repoName : String, description: String, fullName : String) {
+    override fun setRepoInfos(
+        userLogin: String,
+        repoName: String,
+        description: String,
+        fullName: String
+    ) {
         avatarImageView = avatarImageView_Repo
         loginTextView_Repo.text = userLogin
         nameTextView_Repo.text = repoName
@@ -113,8 +139,10 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
         startActivity(Intent(Intent.ACTION_VIEW).setData(uri))
     }
 
-    override fun setGoToRepoUrlOnClick(listener: View.OnClickListener) {
-        openBtn.setOnClickListener(listener)
+
+    override fun collapse() {
+        val from = BottomSheetBehavior.from(bottomSheet)
+        from.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
 }

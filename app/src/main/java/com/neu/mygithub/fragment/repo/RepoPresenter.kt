@@ -1,11 +1,14 @@
 package com.neu.mygithub.fragment.repo
 
+import android.net.Uri
 import android.os.Bundle
+import com.neu.mygithub.github.model.Repo
 
 /** interface das regras de negócio */
 
 interface RepoPresenter {
-    fun loadAndSetRepoOfArgs(args : Bundle)
-    fun configGoToRepoUrlBtn()
-    fun configEditar()
+    var repo: Repo
+    fun getRepoOfArgs(args : Bundle, setar : Boolean = true)
+    fun getUrlRepo() : Uri
+    fun update(repoName : String, userLogin : String, description: String)
 }

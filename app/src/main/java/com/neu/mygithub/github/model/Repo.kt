@@ -117,25 +117,25 @@ data class Repo(
 
     @Entity(tableName = "author_table")
     data class Owner(
-        @SerializedName("login") val login: String = SEM_VALOR_STRING,
+        @SerializedName("login") var login: String = SEM_VALOR_STRING,
         @PrimaryKey(autoGenerate = true)
-        @SerializedName("id") val id: Int = SEM_VALOR_INT,
-        @SerializedName("node_id") val node_id: String = SEM_VALOR_STRING,
-        @SerializedName("avatar_url") val avatar_url: String = SEM_VALOR_STRING,
-        @SerializedName("gravatar_id") val gravatar_id: String = SEM_VALOR_STRING,
-        @SerializedName("url") val url: String = SEM_VALOR_STRING,
-        @SerializedName("html_url") val html_url: String = SEM_VALOR_STRING,
-        @SerializedName("followers_url") val followers_url: String = SEM_VALOR_STRING,
-        @SerializedName("following_url") val following_url: String = SEM_VALOR_STRING,
-        @SerializedName("gists_url") val gists_url: String = SEM_VALOR_STRING,
-        @SerializedName("starred_url") val starred_url: String = SEM_VALOR_STRING,
-        @SerializedName("subscriptions_url") val subscriptions_url: String = SEM_VALOR_STRING,
-        @SerializedName("organizations_url") val organizations_url: String =SEM_VALOR_STRING,
-        @SerializedName("repos_url") val repos_url: String = SEM_VALOR_STRING,
-        @SerializedName("events_url") val events_url: String = SEM_VALOR_STRING,
-        @SerializedName("received_events_url") val received_events_url: String = SEM_VALOR_STRING,
-        @SerializedName("type") val type: String = SEM_VALOR_STRING,
-        @SerializedName("site_admin") val site_admin: Boolean? = SEM_VALOR
+        @SerializedName("id") var id: Int = SEM_VALOR_INT,
+        @SerializedName("node_id") var node_id: String = SEM_VALOR_STRING,
+        @SerializedName("avatar_url") var avatar_url: String = SEM_VALOR_STRING,
+        @SerializedName("gravatar_id") var gravatar_id: String = SEM_VALOR_STRING,
+        @SerializedName("url") var url: String = SEM_VALOR_STRING,
+        @SerializedName("html_url") var html_url: String = SEM_VALOR_STRING,
+        @SerializedName("followers_url") var followers_url: String = SEM_VALOR_STRING,
+        @SerializedName("following_url") var following_url: String = SEM_VALOR_STRING,
+        @SerializedName("gists_url") var gists_url: String = SEM_VALOR_STRING,
+        @SerializedName("starred_url") var starred_url: String = SEM_VALOR_STRING,
+        @SerializedName("subscriptions_url") var subscriptions_url: String = SEM_VALOR_STRING,
+        @SerializedName("organizations_url") var organizations_url: String =SEM_VALOR_STRING,
+        @SerializedName("repos_url") var repos_url: String = SEM_VALOR_STRING,
+        @SerializedName("events_url") var events_url: String = SEM_VALOR_STRING,
+        @SerializedName("received_events_url") var received_events_url: String = SEM_VALOR_STRING,
+        @SerializedName("type") var type: String = SEM_VALOR_STRING,
+        @SerializedName("site_admin") var site_admin: Boolean? = SEM_VALOR
     ) : Parcelable {
         constructor(parcel: Parcel) : this(
             parcel.readString()!!,

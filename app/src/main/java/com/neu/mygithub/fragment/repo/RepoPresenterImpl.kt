@@ -3,9 +3,13 @@ package com.neu.mygithub.fragment.repo
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import com.bumptech.glide.Glide
+import com.neu.mygithub.MyApplication
 import com.neu.mygithub.R
 import com.neu.mygithub.github.model.Repo
+import com.neu.mygithub.github.model.Repos.repos
 
 /** Implementação do RepoPresenter */
 
@@ -14,24 +18,55 @@ class RepoPresenterImpl(
     private val repoView: RepoView /* para notificar RepoFragment */
 ) : RepoPresenter {
 
-    lateinit var repo: Repo
+    override lateinit var repo: Repo
 
-    override fun loadAndSetRepoOfArgs(args: Bundle) {
+    override fun getRepoOfArgs(args: Bundle, setar : Boolean){
         repo = RepoFragmentArgs.fromBundle(args).repo
-        setRepoInfos(repo)
+
+        if(setar)
+        setRepoInfos()
     }
 
-    override fun configGoToRepoUrlBtn() {
-        repoView.setGoToRepoUrlOnClick {
-            repoView.goToUrl(Uri.parse(repo.html_url))
+    override fun getUrlRepo() : Uri {
+           return Uri.parse(repo.html_url)
+    }
+
+    override fun update(repoName: String, userLogin: String, description: String) {
+
+       if(!repoName.isEmpty())
+        repo.name = repoName
+        if(!userLogin.isEmpty())
+        repo.owner!!.login = userLogin
+        if(!description.isEmpty())
+        repo.description = description
+
+        //Atualizar o full_name
+        repo.full_name = repo.owner!!.login + "/" + repo.name
+
+        val handler = Handler(Looper.getMainLooper())
+
+        Thread {
+            MyApplication.databse.repoDatabaseDao.update(repo)
+            handler.post {
+                repoView.collapse()
+                getRepoOfStatic(repo.id)
+            }
+        }.start()
+    }
+
+
+    private fun getRepoOfStatic(id : Int)
+    {
+        repos.forEach {
+            if(it.id == id)
+            {
+                setRepoInfos(it)
+                return
+            }
         }
     }
 
-    override fun configEditar() {
-
-    }
-
-    private fun setRepoInfos(repo : Repo)
+    private fun setRepoInfos(repo : Repo = this.repo)
     {
         val userLogin = repo.owner!!.login
         val repoName = repo.name
