@@ -64,9 +64,9 @@ class ReposFragment() : Fragment(), ReposView, RecyclerAdapter.OnClickListener {
     }
 
     //RecyclerAdapter.OnClickListener
-    override fun onClick(repo: Repo) {
+    override fun onClick(data: Repo) {
         val action =
-            ReposFragmentDirections.actionReposFragmentToRepoFragment(repo)
+            ReposFragmentDirections.actionReposFragmentToRepoFragment(data)
         findNavController().navigate(action)
     }
 }
