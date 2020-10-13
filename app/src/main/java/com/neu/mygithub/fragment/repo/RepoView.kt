@@ -5,7 +5,10 @@ import android.widget.ImageView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
 
-/** interface de comunicação visual com RepoFragment */
+/**
+ * interface de comunicação visual com RepoFragment
+ * @author Irineu A. Silva
+ */
 
 interface RepoView {
     var avatarImageView: ImageView

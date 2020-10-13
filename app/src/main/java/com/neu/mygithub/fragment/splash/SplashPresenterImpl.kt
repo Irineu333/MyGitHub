@@ -5,7 +5,9 @@ import java.util.*
 
 /**
  * implementação das regras de negócio da interface SplashPresenter
- * e ponte de notificações visuais para a SplashView */
+ * e ponte de notificações visuais para a SplashView
+ * @author Irineu A. Silva
+ */
 
 class SplashPresenterImpl(
     private val context: Context,

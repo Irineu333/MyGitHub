@@ -1,6 +1,9 @@
 package com.neu.mygithub.fragment.splash
 
-/** contrato das negras de negócio */
+/**
+ * contrato das negras de negócio
+ * @author Irineu A. Silva
+ */
 
 interface SplashPresenter {
     //Funções

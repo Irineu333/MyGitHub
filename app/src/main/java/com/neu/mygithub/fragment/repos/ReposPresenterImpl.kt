@@ -8,7 +8,9 @@ import com.neu.mygithub.github.model.Repos
 
 /**
  * implementa as regras de negócio da interface ReposPresenter
- * e notifica pela ReposView alterações visuais */
+ * e notifica pela ReposView alterações visuais
+ * @author Irineu A. Silva
+ */
 
 class ReposPresenterImpl(
     private val context: Context,

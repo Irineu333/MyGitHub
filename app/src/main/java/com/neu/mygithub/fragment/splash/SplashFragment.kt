@@ -9,8 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.neu.mygithub.R
 
-/** Pseudo tela de carregamento anterior a tela de repositórios, ReposFragment /
- *  @author Irineu A. Silva
+/**
+ * pseudo tela de carregamento anterior a tela de repositórios, ReposFragment /
+ * @author Irineu A. Silva
  */
 
 class SplashFragment : Fragment(), SplashView {

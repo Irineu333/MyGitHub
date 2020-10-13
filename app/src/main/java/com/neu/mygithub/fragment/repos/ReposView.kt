@@ -4,7 +4,9 @@ import com.neu.mygithub.adapter.RecyclerAdapter
 
 /**
  * interface entre ReposFragment e ReposPresenterImpl
- * para notificação de alterações visuais */
+ * para notificação de alterações visuais
+ * @author Irineu A. Silva
+ */
 
 interface ReposView {
     //Variáveis

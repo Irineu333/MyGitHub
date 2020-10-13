@@ -11,7 +11,10 @@ import com.neu.mygithub.R
 import com.neu.mygithub.github.model.Repo
 import com.neu.mygithub.github.model.Repos.repos
 
-/** Implementação do RepoPresenter */
+/**
+ * Implementação do RepoPresenter
+ * @author Irineu A. Silva
+ */
 
 class RepoPresenterImpl(
     private val context: Context,
