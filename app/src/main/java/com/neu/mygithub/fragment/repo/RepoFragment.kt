@@ -3,7 +3,6 @@ package com.neu.mygithub.fragment.repo
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,12 @@ import com.neu.mygithub.R
 import kotlinx.android.synthetic.main.fragment_repo.*
 import kotlinx.android.synthetic.main.repo_editor.*
 import kotlinx.android.synthetic.main.repo_infos.*
+
+
+/** Tela de apresentação do repositório
+ *  @author Irineu A. Silva
+ */
+
 
 class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
 
@@ -56,28 +61,11 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
         behavior = BottomSheetBehavior.from(bottomSheet)
         behaviorHidden()
 
-        editBtn.setOnClickListener {
-            repoName_Editor.setText(repoPresenter.repo.name)
-            userLogin_Editor.setText(repoPresenter.repo.owner?.login)
-            description_Editor.setText(repoPresenter.repo.description)
-            behaviorExpanded()
-        }
-
-        closeEditorBtn.setOnClickListener {
-            behaviorHidden()
-        }
-
-        configExpandeAndCollapseBtn()
-
-
-        alterarBtn.setOnClickListener {
-
-            val repoName = repoName_Editor.text.toString()
-            val userLogin = userLogin_Editor.text.toString()
-            val description = description_Editor.text.toString()
-
-            repoPresenter.update(repoName, userLogin, description)
-        }
+        //OnClickListener
+        editBtn.setOnClickListener(onClick)
+        closeEditorBtn.setOnClickListener(onClick)
+        collapseEditorBtn.setOnClickListener(onClick)
+        alterarBtn.setOnClickListener(onClick)
     }
 
     private fun behaviorExpanded() {
@@ -88,33 +76,16 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
     private fun behaviorHidden() {
         behavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
+
     private fun behaviorCollapse() {
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
         collapseEditorBtn.rotation = 270f
     }
 
-    private fun configExpandeAndCollapseBtn() {
-
-        collapseEditorBtn.setOnClickListener {
-
-            if (behavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-                behaviorCollapse()
-            } else if (behavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
-                behaviorExpanded()
-            }
-        }
-    }
-
-
     private fun configBackBtn() {
         backBtn.setOnClickListener {
             activity?.onBackPressed()
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        Log.d("RepoFragment", "onActivityCreated")
     }
 
     //from interface RepoView
@@ -143,6 +114,37 @@ class RepoFragment() : Fragment(), RepoView /* para escutar RepoPresenter */ {
     override fun collapse() {
         val from = BottomSheetBehavior.from(bottomSheet)
         from.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
+    /** Todos os OnCLickListeners da tela
+     * @author Irineu A. Silva
+     */
+    val onClick = View.OnClickListener {
+        when (it.id) {
+            R.id.collapseEditorBtn -> {
+                if (behavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+                    behaviorCollapse()
+                } else if (behavior.state == BottomSheetBehavior.STATE_COLLAPSED) {
+                    behaviorExpanded()
+                }
+            }
+            R.id.alterarBtn -> {
+                val repoName = repoName_Editor.text.toString()
+                val userLogin = userLogin_Editor.text.toString()
+                val description = description_Editor.text.toString()
+
+                repoPresenter.update(repoName, userLogin, description)
+            }
+            R.id.editBtn -> {
+                repoName_Editor.setText(repoPresenter.repo.name)
+                userLogin_Editor.setText(repoPresenter.repo.owner?.login)
+                description_Editor.setText(repoPresenter.repo.description)
+                behaviorExpanded()
+            }
+            R.id.closeEditorBtn -> {
+                behaviorHidden()
+            }
+        }
     }
 
 }
